@@ -70,3 +70,8 @@ crashlytics-build.properties
 fmod.log
 fmod_editor.log
 /Balloon Game/UserSettings/Layouts
+
+# Complete UserSettings exclusion
+Balloon Game/UserSettings/
+/Balloon Game/UserSettings/
+UserSettings/
