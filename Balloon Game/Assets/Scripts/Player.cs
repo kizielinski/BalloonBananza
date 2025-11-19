@@ -3,10 +3,19 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speedScale = 5f;
-    Rigidbody2D rb;
+    public Player player;
+    public Rigidbody2D rb;
     private Vector2 prevVelocity;
     private Vector2 downPos;
     private int health = 3;
+
+    void Awake()
+    {
+        if(player == null)
+        {
+            player = this;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,10 +40,10 @@ public class Player : MonoBehaviour
         {
             Vector2 upPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 newVelocity = upPos - downPos;
-            Debug.Log($"downPos={downPos}, upPos={upPos}, newVelocity={newVelocity}");
+            //Debug.Log($"downPos={downPos}, upPos={upPos}, newVelocity={newVelocity}");
             // rb.AddForce(newVelocity * speedScale);
             rb.linearVelocity += newVelocity;
-            Debug.Log($"rb.velocity={rb.linearVelocity}");
+            //Debug.Log($"rb.velocity={rb.linearVelocity}");
         }
         else
         {
