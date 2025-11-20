@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private float speedScale = 5f;
+    [SerializeField] private float baseSpeedScale = 1f;
+    private float speedScale = 1f;
+    private float speedBoostEndTime = 0f;
     Rigidbody2D rb;
     private Vector2 prevVelocity;
     private Vector2 downPos;
@@ -12,11 +14,20 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        speedScale = baseSpeedScale; // Store original speed
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Check if speed boost has expired
+        if (speedBoostEndTime > 0f && Time.time >= speedBoostEndTime)
+        {
+            speedScale = baseSpeedScale;
+            speedBoostEndTime = 0f;
+            Debug.Log("Speed boost expired! Speed back to normal.");
+        }
+
         if (transform.position.y < -5f || transform.position.y > 5f || transform.position.x < -9f || transform.position.x > 9f)
         {
             Destroy(gameObject);
@@ -33,7 +44,7 @@ public class Player : MonoBehaviour
             Vector2 newVelocity = upPos - downPos;
             Debug.Log($"downPos={downPos}, upPos={upPos}, newVelocity={newVelocity}");
             // rb.AddForce(newVelocity * speedScale);
-            rb.linearVelocity += newVelocity;
+            rb.linearVelocity += newVelocity * speedScale;
             Debug.Log($"rb.velocity={rb.linearVelocity}");
         }
         else
@@ -51,18 +62,37 @@ public class Player : MonoBehaviour
         var firstContact = collision.GetContact(0);
         if (prevVelocity.sqrMagnitude < 0.001f)
             return;
+
         var reflectDir = Vector2.Reflect(prevVelocity.normalized, firstContact.normal); //gives a direction vector
         rb.linearVelocity = new Vector2(reflectDir.x, reflectDir.y) * prevVelocity.magnitude; //gives a velocity vector
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            health--;
-            Debug.Log($"Player hit an enemy! Health: {health}");
+            TakeDamage(1);
         }
     }
 
     public int GetHealth()
     {
         return health;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log($"Player took {damage} damage! Health: {health}");
+    }
+
+    public void RestoreAir(int amount)
+    {
+        health += amount;
+        Debug.Log($"Player received {amount} health! Health: {health}");
+    }
+
+    public void ApplySpeedBoost(float speedMultiplier, float duration)
+    {
+        speedScale = baseSpeedScale * speedMultiplier;
+        speedBoostEndTime = Time.time + duration;
+        Debug.Log($"Player speed boosted by {speedMultiplier}x for {duration}s! New speedScale: {speedScale}");
     }
 }
 

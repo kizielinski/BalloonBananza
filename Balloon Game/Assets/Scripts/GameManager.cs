@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,25 +23,60 @@ public class GameManager : MonoBehaviour
     {
         if (!gameStarted)
         {
-            startText.SetActive(true);
-            healthText.gameObject.SetActive(false);
-            if (Input.GetMouseButtonDown(0))
+            if (IsStartGameInputPressed())
             {
-                gameStarted = true;
-                Debug.Log("Game Started");
-                startText.SetActive(false);
-                healthText.gameObject.SetActive(true);
+                StartGame();
             }
         }
         else
         {
-            healthText.text = "Health: " + player.GetHealth();
-            if (player.GetHealth() <= 0)
-            {
-                Debug.Log("Player has died!");
-                Destroy(gameObject);
-                SceneManager.LoadScene("Game");
-            }
+            ContinueGame();
         }
+    }
+
+    void StartGame()
+    {
+        gameStarted = true;
+        Debug.Log("Game Started");
+        RemoveGameOverUI();
+    }
+
+    void EndGame()
+    {
+        gameStarted = false;
+        Debug.Log("Player has died!");
+        ShowGameOverUI();
+        RestartGame();
+    }
+
+    void ShowGameOverUI()
+    {
+        startText.SetActive(true);
+        healthText.gameObject.SetActive(false);
+    }
+
+    void RemoveGameOverUI()
+    {
+        startText.SetActive(false);
+        healthText.gameObject.SetActive(true);
+    }
+
+    void RestartGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
+
+    void ContinueGame()
+    {
+        healthText.text = "Health: " + player.GetHealth();
+        if (player.GetHealth() <= 0)
+        {
+            EndGame();
+        }
+    }
+
+    private bool IsStartGameInputPressed()
+    {
+        return Input.GetMouseButtonDown(0); // Left mouse button
     }
 }
