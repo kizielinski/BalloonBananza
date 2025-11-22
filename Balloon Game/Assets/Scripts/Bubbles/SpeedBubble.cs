@@ -8,6 +8,5 @@ public class SpeedBubble : Bubble
     protected override void ApplyEffect(Player player)
     {
         player.ApplySpeedBoost(speedMultiplier, duration);
-        Debug.Log($"Speed bubble: {speedMultiplier}x speed for {duration}s");
     }
 }

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 8630384655356587116}
   - component: {fileID: 6227884745112009616}
   - component: {fileID: 1380800753963563389}
-  - component: {fileID: 8422628979118547033}
+  - component: {fileID: 6979825339393539965}
+  - component: {fileID: -357196713402109014}
   m_Layer: 0
   m_Name: Block
   m_TagString: Enemy
@@ -163,7 +164,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.77, y: 0.77}
   m_EdgeRadius: 0
---- !u!114 &8422628979118547033
+--- !u!114 &6979825339393539965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,8 +173,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1030688087319970504}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56d42899def62d348ac66823670e465c, type: 3}
+  m_Script: {fileID: 11500000, guid: 264962c88af164346a29f1e333408b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedScale: 2
-  movementRadius: 3
+  health: 1
+  damage: 1
+--- !u!114 &-357196713402109014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030688087319970504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b079a71f572fed48b39e77d8354594c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBeDestroyed: 1
+  healthModifier: 2
+  destroyEffect: {fileID: 0}

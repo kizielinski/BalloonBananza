@@ -5,10 +5,12 @@ public class Player : MonoBehaviour
     [SerializeField] private float baseSpeedScale = 1f;
     private float speedScale = 1f;
     private float speedBoostEndTime = 0f;
-    Rigidbody2D rb;
+    private float shieldEndTime = 0f;
+    private Rigidbody2D rb;
     private Vector2 prevVelocity;
     private Vector2 downPos;
     private int health = 3;
+    private bool isShielded = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,9 +25,13 @@ public class Player : MonoBehaviour
         // Check if speed boost has expired
         if (speedBoostEndTime > 0f && Time.time >= speedBoostEndTime)
         {
-            speedScale = baseSpeedScale;
-            speedBoostEndTime = 0f;
-            Debug.Log("Speed boost expired! Speed back to normal.");
+            EndSpeedBoost();
+        }
+
+        // Check if shield has expired
+        if (IsShielded() && Time.time >= shieldEndTime)
+        {
+            RemoveShield();
         }
 
         if (transform.position.y < -5f || transform.position.y > 5f || transform.position.x < -9f || transform.position.x > 9f)
@@ -36,16 +42,14 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             downPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            // rb.AddForce((touchPos - transform.position).normalized * moveSpeed);
         }
         else if (Input.GetMouseButtonUp(0))
         {
             Vector2 upPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 newVelocity = upPos - downPos;
-            Debug.Log($"downPos={downPos}, upPos={upPos}, newVelocity={newVelocity}");
-            // rb.AddForce(newVelocity * speedScale);
+            // Debug.Log($"downPos={downPos}, upPos={upPos}, newVelocity={newVelocity}");
             rb.linearVelocity += newVelocity * speedScale;
-            Debug.Log($"rb.velocity={rb.linearVelocity}");
+            // Debug.Log($"rb.velocity={rb.linearVelocity}");
         }
         else
         {
@@ -65,10 +69,6 @@ public class Player : MonoBehaviour
 
         var reflectDir = Vector2.Reflect(prevVelocity.normalized, firstContact.normal); //gives a direction vector
         rb.linearVelocity = new Vector2(reflectDir.x, reflectDir.y) * prevVelocity.magnitude; //gives a velocity vector
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            TakeDamage(1);
-        }
     }
 
     public int GetHealth()
@@ -93,6 +93,31 @@ public class Player : MonoBehaviour
         speedScale = baseSpeedScale * speedMultiplier;
         speedBoostEndTime = Time.time + duration;
         Debug.Log($"Player speed boosted by {speedMultiplier}x for {duration}s! New speedScale: {speedScale}");
+    }
+
+    public void EndSpeedBoost()
+    {
+        speedScale = baseSpeedScale;
+        speedBoostEndTime = 0f;
+        Debug.Log("Speed boost expired! Speed back to normal.");
+    }
+
+    public void AddShield(float duration)
+    {
+        shieldEndTime = Time.time + duration;
+        isShielded = true;
+        Debug.Log($"Shield added for {duration} seconds!");
+    }
+
+    public bool IsShielded()
+    {
+        return isShielded;
+    }
+
+    public void RemoveShield()
+    {
+        isShielded = false;
+        Debug.Log("Shield removed!");
     }
 }
 
