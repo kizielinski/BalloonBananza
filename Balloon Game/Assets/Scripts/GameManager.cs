@@ -7,14 +7,17 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject startText;
-    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI airText;
     [SerializeField] private Player player;
+    [SerializeField] private AirBarUI airBarUI;
 
     bool gameStarted = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         Debug.Log("Game Loaded");
+        RemoveGameStartUI();
+        ShowGameOverUI();
 
     }
 
@@ -39,26 +42,38 @@ public class GameManager : MonoBehaviour
         gameStarted = true;
         Debug.Log("Game Started");
         RemoveGameOverUI();
+        ShowGameStartUI();
     }
 
     void EndGame()
     {
         gameStarted = false;
         Debug.Log("Player has died!");
+        RemoveGameStartUI();
         ShowGameOverUI();
         RestartGame();
+    }
+
+    void ShowGameStartUI()
+    {
+        airText.gameObject.SetActive(true);
+        airBarUI.gameObject.SetActive(true);
+    }
+
+    void RemoveGameStartUI()
+    {
+        airText.gameObject.SetActive(false);
+        airBarUI.gameObject.SetActive(false);
     }
 
     void ShowGameOverUI()
     {
         startText.SetActive(true);
-        healthText.gameObject.SetActive(false);
     }
 
     void RemoveGameOverUI()
     {
         startText.SetActive(false);
-        healthText.gameObject.SetActive(true);
     }
 
     void RestartGame()
@@ -68,8 +83,9 @@ public class GameManager : MonoBehaviour
 
     void ContinueGame()
     {
-        healthText.text = "Health: " + player.GetHealth();
-        if (player.GetHealth() <= 0)
+        airText.text = "Air: " + player.GetAir();
+        airBarUI.UpdateAirBar((float)player.GetAir() / player.GetMaxAir());
+        if (player.GetAir() <= 0)
         {
             EndGame();
         }

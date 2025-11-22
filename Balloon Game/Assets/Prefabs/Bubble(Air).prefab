@@ -125,4 +125,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ca43983e5dc4454c8b27120d04af6e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  airAmount: 3
+  airAmount: 20

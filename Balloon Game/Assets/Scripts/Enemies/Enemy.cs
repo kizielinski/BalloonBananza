@@ -3,7 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int health = 1;
-    [SerializeField] private int damage = 1;
+    [SerializeField] private int damage = 20;
 
     private void Start()
     {
@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
             }
             if (player.IsShielded() == false)
             {
-                player.TakeDamage(damage);
+                player.LoseAir(damage);
             }
         }
     }

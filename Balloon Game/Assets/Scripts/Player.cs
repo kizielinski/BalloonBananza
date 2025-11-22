@@ -3,13 +3,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float baseSpeedScale = 1f;
+    [SerializeField] private int maxAir = 100;
     private float speedScale = 1f;
     private float speedBoostEndTime = 0f;
     private float shieldEndTime = 0f;
     private Rigidbody2D rb;
     private Vector2 prevVelocity;
     private Vector2 downPos;
-    private int health = 3;
+    private int air;
     private bool isShielded = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         speedScale = baseSpeedScale; // Store original speed
+        air = maxAir;
     }
 
     // Update is called once per frame
@@ -71,21 +73,26 @@ public class Player : MonoBehaviour
         rb.linearVelocity = new Vector2(reflectDir.x, reflectDir.y) * prevVelocity.magnitude; //gives a velocity vector
     }
 
-    public int GetHealth()
+    public int GetAir()
     {
-        return health;
+        return air;
     }
 
-    public void TakeDamage(int damage)
+    public int GetMaxAir()
     {
-        health -= damage;
-        Debug.Log($"Player took {damage} damage! Health: {health}");
+        return maxAir;
+    }
+
+    public void LoseAir(int amount)
+    {
+        air -= amount;
+        Debug.Log($"Player lost {amount} air! Air: {air}");
     }
 
     public void RestoreAir(int amount)
     {
-        health += amount;
-        Debug.Log($"Player received {amount} health! Health: {health}");
+        air += amount;
+        Debug.Log($"Player received {amount} air! Air: {air}");
     }
 
     public void ApplySpeedBoost(float speedMultiplier, float duration)
