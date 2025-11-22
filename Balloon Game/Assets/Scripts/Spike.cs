@@ -21,7 +21,10 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Enemy")
         {
+<<<<<<< Updated upstream
             Debug.Log($"{collision.gameObject.tag}");
+=======
+>>>>>>> Stashed changes
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());
         }
         else

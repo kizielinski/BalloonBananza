@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Android.Gradle;
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Player player;
 
+<<<<<<< Updated upstream
     Player player1;
 
     UnityEngine.Vector2 playerPos;
@@ -22,6 +24,9 @@ public class GameManager : MonoBehaviour
     
     public Transform spawnPoint;
     public float spawnRate;
+=======
+    CactusSpike Cactus;
+>>>>>>> Stashed changes
 
     bool gameStarted = false;
 
@@ -45,11 +50,16 @@ public class GameManager : MonoBehaviour
             healthText.gameObject.SetActive(false);
             if (Input.GetMouseButtonDown(0))
             {
+<<<<<<< Updated upstream
                 StartSpawning();
                 gameStarted = true;
                 Debug.Log("Game Started");
                 startText.SetActive(false);
                 healthText.gameObject.SetActive(true);
+=======
+                StartGame();
+                StartSpawning();
+>>>>>>> Stashed changes
             }
         }
         else
@@ -80,6 +90,7 @@ public class GameManager : MonoBehaviour
         InvokeRepeating("SpawnSpike", 1.0f, spawnRate);
         }
     }
+<<<<<<< Updated upstream
     private void SpawnSpike()
     {
         spawnPos = spawnPoint.position;
@@ -106,4 +117,17 @@ public class GameManager : MonoBehaviour
         spikeSpeed+=10;
     }
 
+=======
+    void StartSpawning()
+    {   
+        // if(IsInvoking())
+        // {
+        // CancelInvoke("SpawnSpike"); 
+        // }
+        // else
+        // {
+        InvokeRepeating("SpawnSpike", 1.0f, 1);
+        // }
+    }
+>>>>>>> Stashed changes
 }

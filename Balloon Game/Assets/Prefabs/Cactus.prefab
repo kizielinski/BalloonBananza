@@ -102,8 +102,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647cd588d7607c648bb24f1eaaaef004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
   cactus: {fileID: 0}
   rbCactus: {fileID: 0}
+=======
+>>>>>>> Stashed changes
 --- !u!61 &3894944460370384244
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -176,4 +179,8 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+<<<<<<< Updated upstream
   m_Constraints: 3
+=======
+  m_Constraints: 7
+>>>>>>> Stashed changes
