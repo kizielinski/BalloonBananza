@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: -4332065794632645858, guid: 03bb8720f9b5a8b41a6d06dec98ee4d2, type: 3}
     - target: {fileID: 7385633126215337658, guid: 9ad914da0b986724cb700953c44f6d07, type: 3}
       propertyPath: m_Name
-      value: Bubble Variant
+      value: Bubble(Shield)
       objectReference: {fileID: 0}
     - target: {fileID: 7788722558882591183, guid: 9ad914da0b986724cb700953c44f6d07, type: 3}
       propertyPath: m_LocalScale.x
