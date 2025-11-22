@@ -16,7 +16,15 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Player player = collision.gameObject.GetComponent<Player>();
-            player?.TakeDamage(damage);
+            if (player == null)
+            {
+                Debug.LogWarning("Player component not found on collided object.");
+                return;
+            }
+            if (player.IsShielded() == false)
+            {
+                player.TakeDamage(damage);
+            }
         }
     }
 

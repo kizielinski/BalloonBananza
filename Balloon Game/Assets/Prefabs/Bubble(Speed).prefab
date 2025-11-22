@@ -8,9 +8,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 215245138867623715, guid: 9ad914da0b986724cb700953c44f6d07, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 215245138867623715, guid: 9ad914da0b986724cb700953c44f6d07, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500241097395456397, guid: 9ad914da0b986724cb700953c44f6d07, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500241097395456397, guid: 9ad914da0b986724cb700953c44f6d07, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 4141138629526647054, guid: 5030b02ba5bafd746800e88698db8363, type: 3}
     - target: {fileID: 7385633126215337658, guid: 9ad914da0b986724cb700953c44f6d07, type: 3}
       propertyPath: m_Name
       value: Bubble(Speed)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7788722558882591183, guid: 9ad914da0b986724cb700953c44f6d07, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7788722558882591183, guid: 9ad914da0b986724cb700953c44f6d07, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7788722558882591183, guid: 9ad914da0b986724cb700953c44f6d07, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7788722558882591183, guid: 9ad914da0b986724cb700953c44f6d07, type: 3}
       propertyPath: m_LocalPosition.x
