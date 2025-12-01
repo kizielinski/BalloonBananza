@@ -36,10 +36,10 @@ public class Player : MonoBehaviour
             RemoveShield();
         }
 
-        if (transform.position.y < -5f || transform.position.y > 5f || transform.position.x < -9f || transform.position.x > 9f)
-        {
-            Destroy(gameObject);
-        }
+        // if (!IsInBounds())
+        // {
+        //     Destroy(gameObject);
+        // }
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -126,6 +126,10 @@ public class Player : MonoBehaviour
         isShielded = false;
         Debug.Log("Shield removed!");
     }
-}
+    public bool IsInBounds()
+    {
+        return transform.position.y < -5f || transform.position.y > 5f || transform.position.x < -9f || transform.position.x > 9f;
+    }
 
+}
 
