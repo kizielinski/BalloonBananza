@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
     }
     public bool IsInBounds()
     {
-        return transform.position.y < -5f || transform.position.y > 5f || transform.position.x < -9f || transform.position.x > 9f;
+        return transform.position.y >= GameManager.Instance.minY || transform.position.y <= GameManager.Instance.maxY || transform.position.x >= GameManager.Instance.minX || transform.position.x <= GameManager.Instance.maxX;
     }
 
 }

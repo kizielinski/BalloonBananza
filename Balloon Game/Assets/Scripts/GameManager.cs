@@ -6,12 +6,31 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+
     [SerializeField] private GameObject startText;
     [SerializeField] private TextMeshProUGUI airText;
     [SerializeField] private Player player;
     [SerializeField] private AirBarUI airBarUI;
 
+    [SerializeField] public float minX = -10f;
+    [SerializeField] public float maxX = 10f;
+    [SerializeField] public float minY = -10f;
+    [SerializeField] public float maxY = 10f;
+
     bool gameStarted = false;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

@@ -6,10 +6,11 @@ public class CameraFollow : MonoBehaviour
     public float smoothSpeed = 0.125f;
     public Vector3 offset;
 
-    public float minX = -9f;
-    public float maxX = 9f;
-    public float minY = -5f;
-    public float maxY = 5f;
+    void Start()
+    {
+        // Calculate the initial offset from the player to the camera
+        offset = transform.position - player.position;
+    }
 
     void LateUpdate()
     {
@@ -18,8 +19,8 @@ public class CameraFollow : MonoBehaviour
             Vector3 desiredPosition = player.position + offset;
             Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
             
-            smoothedPosition.x = Mathf.Clamp(smoothedPosition.x, minX, maxX);
-            smoothedPosition.y = Mathf.Clamp(smoothedPosition.y, minY, maxY);
+            smoothedPosition.x = Mathf.Clamp(smoothedPosition.x, GameManager.Instance.minX, GameManager.Instance.maxX);
+            smoothedPosition.y = Mathf.Clamp(smoothedPosition.y, GameManager.Instance.minY, GameManager.Instance.maxY);
 
             transform.position = smoothedPosition;
         }
