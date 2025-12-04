@@ -13,10 +13,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private AirBarUI airBarUI;
 
-    [SerializeField] public float minX = -10f;
-    [SerializeField] public float maxX = 10f;
-    [SerializeField] public float minY = -10f;
-    [SerializeField] public float maxY = 10f;
+    [SerializeField] public float minX = -1f;
+    [SerializeField] public float maxX = 1f;
+    [SerializeField] public float minY = -5f;
+    [SerializeField] public float maxY = 5f;
 
     bool gameStarted = false;
 

@@ -623,10 +623,10 @@ MonoBehaviour:
   airText: {fileID: 864398094}
   player: {fileID: 1801287753}
   airBarUI: {fileID: 1256408522}
-  minX: -20
-  maxX: 20
-  minY: -20
-  maxY: 20
+  minX: -1
+  maxX: 1
+  minY: -5
+  maxY: 5
 --- !u!4 &762735729
 Transform:
   m_ObjectHideFlags: 0
