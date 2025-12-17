@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb;
     private Vector2 prevVelocity;
     private Vector2 downPos;
-    private int health = 3;
+    private int health = 6;
 
     void Awake()
     {

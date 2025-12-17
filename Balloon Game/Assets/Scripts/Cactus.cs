@@ -2,20 +2,25 @@ using UnityEngine;
 
 public class Cactus : MonoBehaviour
 {
-    public Cactus cactus;
-    public Rigidbody2D rbCactus;
+    
+    public static Cactus instanceC {get; private set;}
+    Rigidbody2D rbCactus;
+
+    public Vector2 posCatcus {get; set;}
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Awake()
+    void Awake()
     {
-        if(cactus == null)
+        if(instanceC == null)
         {
-            cactus = this;
+            instanceC = this;
         }
+        
     }
     
     void Start()
     {
-        rbCactus = GetComponent<Rigidbody2D>(); 
+        rbCactus = GetComponent<Rigidbody2D>();
+        posCatcus = rbCactus.position; 
     }
 
     // Update is called once per frame

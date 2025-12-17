@@ -5,6 +5,8 @@ using Unity.Android.Gradle;
 using UnityEditor.Callbacks;
 using System.Numerics;
 using Unity.Mathematics;
+using System;
+using System.Reflection;
 
 
 public class GameManager : MonoBehaviour
@@ -13,14 +15,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private Player player;
 
+    float delay = 1;
+
     Player player1;
 
-    UnityEngine.Vector2 playerPos;
-    Cactus cactus1;
     public GameObject Spike;
-    UnityEngine.Vector2 spawnPos;
-    
-    public Transform spawnPoint;
+    private UnityEngine.Vector2 spawnPos = Cactus.instanceC.posCatcus;
+
     public float spawnRate;
 
     bool gameStarted = false;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
             healthText.gameObject.SetActive(false);
             if (Input.GetMouseButtonDown(0))
             {
-                StartSpawning();
+                // StartSpawning();
                 gameStarted = true;
                 Debug.Log("Game Started");
                 startText.SetActive(false);
@@ -62,33 +63,55 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("ErickGameScene");
             }
         }
-        if(math.abs(player1.rb.position.x - spawnPoint.position.x) < 2 && math.abs(player1.rb.position.y - spawnPoint.position.y) < 2)
+        if(CactusDetection.instanceCD.detect)
         {
             StartSpawning();
         }
-        Debug.Log($"X:{math.abs(player1.rb.position.x - spawnPoint.position.x)}Y:{math.abs(player1.rb.position.y - spawnPoint.position.y)}");
+        else
+        {
+            CancelWithDelay(delay);
+        }
+        //Debug.Log($"Detection = {CactusDetection.instanceCD.detect} Invoking = {IsInvoking(nameof(SpawnSpike))}");
     }
 
      private void StartSpawning()
-    {   
-        if(IsInvoking())
+    {
+    
+        if(IsInvoking(nameof(SpawnSpike)))
         {
-        CancelInvoke("SpawnSpike"); 
+        
         }
         else
         {
-        InvokeRepeating("SpawnSpike", 1.0f, spawnRate);
+            InvokeRepeating("SpawnSpike", 1.0f, spawnRate);
+        }
+
+        // if(IsInvoking(nameof(SpawnSpike)))
+        // {
+        // CancelInvoke("SpawnSpike"); 
+        // }
+        // else
+        // {
+        // InvokeRepeating("SpawnSpike", 1.0f, spawnRate);
+        // }
+    }
+
+    private void StopSpawning()
+    {
+        if(IsInvoking(nameof(SpawnSpike)))
+        {
+           CancelInvoke("SpawnSpike"); 
         }
     }
     private void SpawnSpike()
     {
-        spawnPos = spawnPoint.position;
         int objectCount = 8;
         
         Debug.Log($"Spawn Pos{spawnPos}");
 
         for (int i = 0; i < objectCount; i++)
         {
+            spawnPos = Cactus.instanceC.posCatcus;
             float radius = 1.0f;
             float theta = i * 2 * Mathf.PI / objectCount;
             float x = Mathf.Sin(theta) * radius;
@@ -101,9 +124,22 @@ public class GameManager : MonoBehaviour
             // Physics2D.IgnoreCollision(rbTemp.GetComponent<Collider2D>(), spawnPoint.GetComponent<Collider2D>());
             rbTemp.AddForce(new UnityEngine.Vector2(x, y).normalized * spikeSpeed);
             rotate -= 360 / objectCount;
-            spawnPos = spawnPoint.position;               
+                           
         }
         spikeSpeed+=10;
     }
+
+public void CancelWithDelay(float delay)
+{
+StartCoroutine(BuildAfterDelay(delay));
+}
+
+private System.Collections.IEnumerator BuildAfterDelay(float delay)
+{
+yield return new WaitForSeconds(delay);
+StopSpawning();
+}
+
+
 
 }
