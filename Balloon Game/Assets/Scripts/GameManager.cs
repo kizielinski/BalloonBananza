@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         {
             ContinueGame();
         }
+
     }
 
     void StartGame()

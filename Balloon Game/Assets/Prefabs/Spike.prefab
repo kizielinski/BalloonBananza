@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -2506472122628770612}
   - component: {fileID: -2840865198899030708}
   - component: {fileID: -1034929982233767615}
+  - component: {fileID: 8372729854791080475}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Enemy
@@ -31,8 +32,8 @@ Transform:
   m_GameObject: {fileID: 5059922925250382836}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.179, y: 0.2756, z: 0}
-  m_LocalScale: {x: 0.2439, y: 0.2439, z: 0.2439}
+  m_LocalPosition: {x: 2.1993, y: 0.2906, z: 0}
+  m_LocalScale: {x: 0.35092333, y: 0.35092333, z: 0.35092333}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5419517844233623992, guid: 56f4b210875c43f46bb974e2cf756fb4, type: 3}
+  m_Sprite: {fileID: 1225859218, guid: b9807f6412b00db4ca7aa6f1094e7489, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -165,17 +166,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.011529028, y: 0.15730384}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.14, y: 5.12}
+    pivot: {x: 0.54285717, y: 0.22222222}
+    oldSize: {x: 0.35, y: 0.63}
     newSize: {x: 1.14, y: 5.12}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.14, y: 5.12}
+  m_Size: {x: 0.40212947, y: 0.6318114}
   m_EdgeRadius: 0
 --- !u!114 &-2840865198899030708
 MonoBehaviour:
@@ -203,3 +204,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   damage: 1
+--- !u!114 &8372729854791080475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5059922925250382836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f233ff3b59de12647a737821657552fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priorityValue: 2

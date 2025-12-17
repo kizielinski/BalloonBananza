@@ -3,7 +3,7 @@ using UnityEngine;
 public class Spike : MonoBehaviour
 {
     Rigidbody2D rbSpike;
-    [SerializeField] public GameObject gameSpike;
+    public static Spike gameSpike {get; private set;}
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,15 +16,15 @@ public class Spike : MonoBehaviour
     {
 
     }
-    // private void OnCollisionEnter2D(Collision2D collision)
-    // {
-    //     if(collision.gameObject.tag == "Enemy")
-    //     {
-    //         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());
-    //     }
-    //     else
-    //     {
-    //         Destroy(gameObject);    
-    //     }
-    // }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.gameObject.GetComponent<Collider2D>());
+        }
+        else
+        {
+            Destroy(gameObject);    
+        }
+    }
 }
