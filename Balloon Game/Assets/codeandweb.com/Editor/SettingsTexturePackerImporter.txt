@@ -1,0 +1,8 @@
+version: 2
+tpsheetFileNames:
+- Assets/Sprites/Characters/Balloon/balloon_move.tpsheet
+textureFileNames:
+- Assets/Sprites/Characters/Balloon/balloonmove.png
+normalmapFileNames:
+- 
+enableDebugOutput: 0

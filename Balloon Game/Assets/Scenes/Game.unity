@@ -612,6 +612,10 @@ MonoBehaviour:
   airText: {fileID: 864398094}
   player: {fileID: 1801287753}
   airBarUI: {fileID: 1256408522}
+  minX: -1
+  maxX: 1
+  minY: -5
+  maxY: 5
 --- !u!4 &762735729
 Transform:
   m_ObjectHideFlags: 0
@@ -1424,6 +1428,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805160356}
   m_CullTransparentMesh: 1
+--- !u!212 &2025444731 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 5683562386885439960, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+  m_PrefabInstance: {fileID: 9015613816687149134}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2033286572 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5649215563291703193, guid: fdc903da54a14a5458f8d2c7bb5f509d, type: 3}
@@ -1705,6 +1714,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5181806883031504, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+      propertyPath: sr
+      value: 
+      objectReference: {fileID: 2025444731}
     - target: {fileID: 722640083909035497, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
       propertyPath: m_Name
       value: Player

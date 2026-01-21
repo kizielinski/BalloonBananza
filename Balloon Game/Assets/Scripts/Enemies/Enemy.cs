@@ -21,9 +21,10 @@ public class Enemy : MonoBehaviour
                 Debug.LogWarning("Player component not found on collided object.");
                 return;
             }
-            if (player.IsShielded() == false)
+            if (!player.IsInvincible() && !player.IsShielded())
             {
                 player.LoseAir(damage);
+                player.ApplyInvincibility(1f);
             }
         }
     }
