@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,13 +30,10 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("Game Loaded");
         RemoveGameStartUI();
         ShowGameOverUI();
-
     }
 
     // Update is called once per frame
@@ -59,7 +55,6 @@ public class GameManager : MonoBehaviour
     void StartGame()
     {
         gameStarted = true;
-        Debug.Log("Game Started");
         RemoveGameOverUI();
         ShowGameStartUI();
     }
@@ -67,7 +62,6 @@ public class GameManager : MonoBehaviour
     void EndGame()
     {
         gameStarted = false;
-        Debug.Log("Player has died!");
         RemoveGameStartUI();
         ShowGameOverUI();
         RestartGame();
