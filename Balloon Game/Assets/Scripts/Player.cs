@@ -54,11 +54,6 @@ public class Player : MonoBehaviour
             RemoveInvincibility();
         }
 
-        // if (!IsInBounds())
-        // {
-        //     Destroy(gameObject);
-        // }
-
         if (Input.GetMouseButtonDown(0))
         {
             downPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -67,21 +62,12 @@ public class Player : MonoBehaviour
         {
             Vector2 upPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 newVelocity = upPos - downPos;
-            // Debug.Log($"downPos={downPos}, upPos={upPos}, newVelocity={newVelocity}");
             rb.linearVelocity += newVelocity * speedScale;
-            // Debug.Log($"rb.velocity={rb.linearVelocity}");
         }
         else
         {
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, 0.005f);
             rb.angularVelocity = Mathf.MoveTowardsAngle(rb.angularVelocity, 0f, 0.1f);
-            Debug.Log($"rb.angularVelocity={rb.angularVelocity}");
-            // if (Mathf.Abs(rb.angularVelocity) == 0f)
-            // {
-            //     float currentAngle = rb.rotation;
-            //     float newAngle = Mathf.MoveTowardsAngle(currentAngle, 0f, 2f); // 2f is degrees per frame, adjust for speed
-            //     rb.MoveRotation(newAngle);
-            // }
         }
 
         // Update animations according to movement direction
@@ -137,13 +123,12 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log($"Collision with {collision.gameObject.name}, normal={collision.GetContact(0).normal}, velocity={prevVelocity}");
         var firstContact = collision.GetContact(0);
         if (prevVelocity.sqrMagnitude < 0.001f)
             return;
 
-        var reflectDir = Vector2.Reflect(prevVelocity.normalized, firstContact.normal); //gives a direction vector
-        rb.linearVelocity = new Vector2(reflectDir.x, reflectDir.y) * prevVelocity.magnitude; //gives a velocity vector
+        var reflectDir = Vector2.Reflect(prevVelocity.normalized, firstContact.normal);
+        rb.linearVelocity = new Vector2(reflectDir.x, reflectDir.y) * prevVelocity.magnitude;
     }
 
     public int GetAir()
@@ -159,48 +144,40 @@ public class Player : MonoBehaviour
     public void LoseAir(int amount)
     {
         air -= amount;
-        Debug.Log($"Player lost {amount} air! Air: {air}");
     }
 
     public void RestoreAir(int amount)
     {
         air += amount;
-        Debug.Log($"Player received {amount} air! Air: {air}");
     }
 
     public void ApplySpeedBoost(float speedMultiplier, float duration)
     {
         speedScale = baseSpeedScale * speedMultiplier;
         speedBoostEndTime = Time.time + duration;
-        Debug.Log($"Player speed boosted by {speedMultiplier}x for {duration}s! New speedScale: {speedScale}");
     }
 
     public void EndSpeedBoost()
     {
         speedScale = baseSpeedScale;
         speedBoostEndTime = 0f;
-        Debug.Log("Speed boost expired! Speed back to normal.");
     }
 
     public void AddShield(float duration)
     {
         shieldEndTime = Time.time + duration;
         isShielded = true;
-        Debug.Log($"Shield added for {duration} seconds!");
     }
 
     public void ApplyInvincibility(float duration)
     {
-
         invincibilityEndTime = Time.time + duration;
         isInvincible = true;
-        Debug.Log($"Player is invincible for {duration} seconds!");
 
         float blink = Mathf.PingPong(Time.time * 10f, 1f);
         Color c = sr.color;
         c.a = Mathf.Lerp(0.3f, 1f, blink);
         sr.color = c;
-
     }
     public bool IsInvincible()
     {
@@ -215,19 +192,17 @@ public class Player : MonoBehaviour
     public void RemoveShield()
     {
         isShielded = false;
-        Debug.Log("Shield removed!");
     }
 
     public void RemoveInvincibility()
     {
         isInvincible = false;
-        Debug.Log("Invincibility removed!");
         sr.color = defaultColor;
     }
 
     public bool IsInBounds()
     {
-        return transform.position.y >= GameManager.Instance.minY || transform.position.y <= GameManager.Instance.maxY || transform.position.x >= GameManager.Instance.minX || transform.position.x <= GameManager.Instance.maxX;
+        return transform.position.y >= GameManager.Instance.minY && transform.position.y <= GameManager.Instance.maxY && transform.position.x >= GameManager.Instance.minX && transform.position.x <= GameManager.Instance.maxX;
     }
 
 }

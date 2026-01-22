@@ -11,8 +11,7 @@ public class CameraFollow : MonoBehaviour
         // Calculate the initial offset from the player to the camera
         offset = transform.position - player.position;
     }
-    void Update()
-    { }
+
     void LateUpdate()
     {
         if (player != null)
