@@ -21,6 +21,17 @@ public class Player : MonoBehaviour
     private bool isShielded = false;
     private bool isInvincible = false;
 
+    [Header("Directional Sprites")]
+    public Sprite idleSprite;
+    public Sprite rightSprite;
+    public Sprite leftSprite;
+    public Sprite upSprite;
+    public Sprite downSprite;
+    public Sprite rightUpSprite;
+    public Sprite rightDownSprite;
+    public Sprite leftUpSprite;
+    public Sprite leftDownSprite;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -85,7 +96,7 @@ public class Player : MonoBehaviour
         }
 
         // Update animations according to movement direction
-        UpdateAnimationState();
+        UpdateSprite();
         prevVelocity = rb.linearVelocity;
 
         // Alpha blinking for invincibility
@@ -104,34 +115,35 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void UpdateAnimationState()
+    private void UpdateSprite()
     {
-        if (animator == null || rb == null) return;
-
+        if (sr == null || rb == null) return;
         Vector2 v = rb.linearVelocity;
         bool isMoving = v.sqrMagnitude > directionThreshold * directionThreshold;
-        animator.SetBool(hashIsMoving, isMoving);
-        if (!isMoving) return;
 
-        // 8-direction mapping based purely on velocity
-        // 0=Right, 1=Left, 2=Up, 3=Down, 4=RightUp, 5=RightDown, 6=LeftUp, 7=LeftDown
+        if (!isMoving)
+        {
+            if (idleSprite != null) sr.sprite = idleSprite;
+            return;
+        }
+
         float ax = Mathf.Abs(v.x);
         float ay = Mathf.Abs(v.y);
+
         if (ax > directionThreshold && ay > directionThreshold)
         {
-            if (v.x > 0f && v.y > 0f) { animator.SetInteger(hashDirection, 4); return; }
-            if (v.x > 0f && v.y < 0f) { animator.SetInteger(hashDirection, 5); return; }
-            if (v.x < 0f && v.y > 0f) { animator.SetInteger(hashDirection, 6); return; }
-            if (v.x < 0f && v.y < 0f) { animator.SetInteger(hashDirection, 7); return; }
+            if (v.x > 0f && v.y > 0f && rightUpSprite != null) sr.sprite = rightUpSprite;
+            else if (v.x > 0f && v.y < 0f && rightDownSprite != null) sr.sprite = rightDownSprite;
+            else if (v.x < 0f && v.y > 0f && leftUpSprite != null) sr.sprite = leftUpSprite;
+            else if (v.x < 0f && v.y < 0f && leftDownSprite != null) sr.sprite = leftDownSprite;
         }
-        // Fallback to cardinal where one axis dominates or only one exceeds threshold
-        if (ax >= ay)
+        else if (ax >= ay)
         {
-            animator.SetInteger(hashDirection, v.x >= 0f ? 0 : 1);
+            sr.sprite = v.x >= 0f ? rightSprite : leftSprite;
         }
         else
         {
-            animator.SetInteger(hashDirection, v.y >= 0f ? 2 : 3);
+            sr.sprite = v.y >= 0f ? upSprite : downSprite;
         }
     }
 
