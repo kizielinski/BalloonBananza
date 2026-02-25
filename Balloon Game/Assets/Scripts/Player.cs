@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float baseSpeedScale = 1f;
     [SerializeField] private int maxAir = 100;
+    [SerializeField] private int lives = 3;
     [SerializeField] private float directionThreshold = 0.05f;
     private float speedScale = 1f;
     private float speedBoostEndTime = 0f;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     private int hashDirection;
     private int hashIsMoving;
     private Color defaultColor;
+    private Vector2 initialSpawnPosition;
     private Vector2 prevVelocity;
     private Vector2 downPos;
     private int air;
@@ -41,6 +43,7 @@ public class Player : MonoBehaviour
         hashDirection = Animator.StringToHash("Direction");
         hashIsMoving = Animator.StringToHash("IsMoving");
         defaultColor = sr.color;
+        initialSpawnPosition = transform.position;
         speedScale = baseSpeedScale; // Store original speed
         air = maxAir;
     }
@@ -158,6 +161,23 @@ public class Player : MonoBehaviour
         rb.linearVelocity = new Vector2(reflectDir.x, reflectDir.y) * prevVelocity.magnitude; //gives a velocity vector
     }
 
+    public int GetLives()
+    {
+        return lives;
+    }
+
+    public void LoseLife()
+    {
+        lives--;
+        Debug.Log($"Player lost a life! Lives: {lives}");
+    }
+
+    public void GainLife()
+    {
+        lives++;
+        Debug.Log($"Player gained a life! Lives: {lives}");
+    }
+
     public int GetAir()
     {
         return air;
@@ -240,6 +260,13 @@ public class Player : MonoBehaviour
     public bool IsInBounds()
     {
         return transform.position.y >= GameManager.Instance.minY || transform.position.y <= GameManager.Instance.maxY || transform.position.x >= GameManager.Instance.minX || transform.position.x <= GameManager.Instance.maxX;
+    }
+
+    public void RespawnAtInitialSpawn()
+    {
+        transform.position = initialSpawnPosition;
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
     }
 
 }

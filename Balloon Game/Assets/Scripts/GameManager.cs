@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,9 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [SerializeField] private GameObject startText;
-    [SerializeField] private TextMeshProUGUI airText;
     [SerializeField] private Player player;
     [SerializeField] private AirBarUI airBarUI;
+    [SerializeField] private LivesUI livesUI;
 
     [SerializeField] public float minX = -1f;
     [SerializeField] public float maxX = 1f;
@@ -75,14 +74,14 @@ public class GameManager : MonoBehaviour
 
     void ShowGameStartUI()
     {
-        airText.gameObject.SetActive(true);
         airBarUI.gameObject.SetActive(true);
+        livesUI.gameObject.SetActive(true);
     }
 
     void RemoveGameStartUI()
     {
-        airText.gameObject.SetActive(false);
         airBarUI.gameObject.SetActive(false);
+        livesUI.gameObject.SetActive(false);
     }
 
     void ShowGameOverUI()
@@ -102,12 +101,27 @@ public class GameManager : MonoBehaviour
 
     void ContinueGame()
     {
-        airText.text = "Air: " + player.GetAir();
-        airBarUI.UpdateAirBar((float)player.GetAir() / player.GetMaxAir());
         if (player.GetAir() <= 0)
         {
-            EndGame();
+            player.LoseLife();
+            if (player.GetLives() <= 0)
+            {
+                EndGame();
+                return;
+            }
+
+            player.RestoreAir(player.GetMaxAir());
+            player.RespawnAtInitialSpawn();
         }
+
+        updatePlayerUI();
+
+    }
+
+    void updatePlayerUI()
+    {
+        airBarUI.UpdateAirUI(player.GetAir(), player.GetMaxAir());
+        livesUI.UpdateLivesUI(player.GetLives());
     }
 
     private bool IsStartGameInputPressed()
