@@ -707,9 +707,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startText: {fileID: 857125264}
-  airText: {fileID: 864398094}
   player: {fileID: 1801287753}
   airBarUI: {fileID: 1256408522}
+  livesUI: {fileID: 0}
   minX: -1
   maxX: 1
   minY: -5
@@ -1127,6 +1127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   airBar: {fileID: 1805160357}
+  airText: {fileID: 0}
 --- !u!224 &1256408523
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1775,9 +1776,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5181806883031504, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+      propertyPath: upSprite
+      value: 
+      objectReference: {fileID: -1163481627, guid: 47ab2da8ec83769458e6e42b4f4368c7, type: 3}
+    - target: {fileID: 5181806883031504, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+      propertyPath: downSprite
+      value: 
+      objectReference: {fileID: -1185178377, guid: 47ab2da8ec83769458e6e42b4f4368c7, type: 3}
+    - target: {fileID: 5181806883031504, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+      propertyPath: idleSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b40df03cf5346f846a0e57238735ec07, type: 3}
+    - target: {fileID: 5181806883031504, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+      propertyPath: leftSprite
+      value: 
+      objectReference: {fileID: -109794959, guid: 47ab2da8ec83769458e6e42b4f4368c7, type: 3}
+    - target: {fileID: 5181806883031504, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+      propertyPath: rightSprite
+      value: 
+      objectReference: {fileID: 1386701535, guid: 47ab2da8ec83769458e6e42b4f4368c7, type: 3}
+    - target: {fileID: 5181806883031504, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+      propertyPath: leftUpSprite
+      value: 
+      objectReference: {fileID: 1913559600, guid: 47ab2da8ec83769458e6e42b4f4368c7, type: 3}
+    - target: {fileID: 5181806883031504, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+      propertyPath: rightUpSprite
+      value: 
+      objectReference: {fileID: 1425060096, guid: 47ab2da8ec83769458e6e42b4f4368c7, type: 3}
+    - target: {fileID: 5181806883031504, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+      propertyPath: leftDownSprite
+      value: 
+      objectReference: {fileID: -270071370, guid: 47ab2da8ec83769458e6e42b4f4368c7, type: 3}
+    - target: {fileID: 5181806883031504, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+      propertyPath: rightDownSprite
+      value: 
+      objectReference: {fileID: 87237328, guid: 47ab2da8ec83769458e6e42b4f4368c7, type: 3}
     - target: {fileID: 722640083909035497, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2121669019947553730, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
+      propertyPath: m_Constraints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5065912061893416974, guid: 6106b8f8565694a46b990d455e28a67f, type: 3}
       propertyPath: m_Size.y
