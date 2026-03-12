@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CircleCycle : MonoBehaviour
+public class RectangularCycle : MonoBehaviour
 {
     [SerializeField] private float x = 4f;
     [SerializeField] private float y = 2f;

@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
         {
             rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, Vector2.zero, 0.005f);
             rb.angularVelocity = Mathf.MoveTowardsAngle(rb.angularVelocity, 0f, 0.1f);
-            Debug.Log($"rb.angularVelocity={rb.angularVelocity}");
+            // Debug.Log($"rb.angularVelocity={rb.angularVelocity}");
             // if (Mathf.Abs(rb.angularVelocity) == 0f)
             // {
             //     float currentAngle = rb.rotation;
