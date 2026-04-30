@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int health = 1;
-    [SerializeField] private int damage = 20;
+    [SerializeField] private int health;
+    [SerializeField] private int damage;
+    [SerializeField] private string enemyName;
 
     private void Start()
     {
-        // Enemy initialization
+
     }
 
     // Collision behavior
